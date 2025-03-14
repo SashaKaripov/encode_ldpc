@@ -2,34 +2,26 @@
 #include "external/doctest/doctest.h"
 #include "functions.h"
 
+TEST_CASE("Checking the incorrect file's name"){
+    CHECK_THROWS_WITH(read_matrix("bad_file_name.txt", 10, 15), "File does not exist: bad_file_name.txt");
+}
 
-TEST_CASE("Checking the correctness of the formation of the G_matrix and the encoded message"){
-    std::ifstream test_file("test_data.txt");
-	int G_lines{10};
-	int G_rows{15};
-    std::string line;
-	Eigen::SparseMatrix<GF2> test_G(G_lines, G_rows);
-	int test_G_row{};
-	for (int i{}; i < G_lines; i++) {
-		test_G_row = 0;
-		std::getline(test_file, line);
-		std::istringstream iss(line);
-		int number;
-		while (iss >> number) {
-			test_G.insert(i, test_G_row) = GF2(number);
-			test_G_row += 1;
-		}
-	}
-    std::ifstream file("matrix_data.txt");
-	int H_lines{5};
-	int H_rows{15};
-	std::vector<int> vector_messgae_bits{ 1,1,0,1,0,0,0,0,1,1 };
-	Eigen::SparseMatrix<GF2> G_matrix{}, X_vector{};
-    std::tie(G_matrix, X_vector) = H_to_X(file, vector_messgae_bits, H_lines, H_rows);
+TEST_CASE("Checking the correctness of the formation of the G matrix"){
+    Eigen::SparseMatrix<GF2> test_G_matrix{read_matrix("test_data.txt", 10, 15)};
+    std::string H_file{"matrix_data.txt"};
+    int H_rows{5};
+    int H_cols{15};
+
+    Eigen::VectorX<GF2> vector_message_bits(10);
+    vector_message_bits << GF2(1), GF2(0), GF2(0), GF2(1), GF2(0), GF2(1), GF2(1), GF2(0), GF2(1), GF2(0);
+
+    Eigen::VectorX<GF2> codeword{};
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> G_matrix{};
+    std::tie(G_matrix, codeword) = H_to_codeword(H_file, vector_message_bits, H_rows, H_cols);
     bool cheking_1 = true;
-    for (int i = 0; i < G_lines; ++i) {
-        for (int j = 0; j < G_rows; ++j) {
-            if (test_G.coeff(i, j) != G_matrix.coeff(i, j)){
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 15; ++j) {
+            if (test_G_matrix.coeff(i, j) != G_matrix(i, j)){
                 cheking_1 = false;
                 break;
             }
@@ -41,26 +33,29 @@ TEST_CASE("Checking the correctness of the formation of the G_matrix and the enc
     CHECK(cheking_1);
 }
 
-TEST_CASE("Checking the size of the matrices and the sindrom"){
-    std::ifstream file("matrix_data.txt");
-	int H_rows{5};
-	int H_cols{15};
-	std::vector<int> vector_messgae_bits{ 1,1,0,1,0,0,0,0,1,1 };
-	Eigen::SparseMatrix<GF2> G_matrix{}, X_vector{};
-	std::tie(G_matrix, X_vector) = H_to_X(file, vector_messgae_bits, H_rows, H_cols);
-	Eigen::SparseMatrix<GF2> zero_vector = checking_syndrome(X_vector, file, H_rows, H_cols);
 
-    CHECK(G_matrix.cols() == H_cols);
-    CHECK(G_matrix.rows() == H_cols - H_rows);
-    CHECK(X_vector.rows() == 1);
-    CHECK(X_vector.cols() == H_cols);
+TEST_CASE("Checking the size of the matrices and the syndrome for all 10-bit-vectors") {
+    std::string H_file{"matrix_data.txt"};
+    int H_rows{5};
+    int H_cols{15};
+    for (int message_value = 0; message_value < (1 << 10); ++message_value) {
+        Eigen::VectorX<GF2> vector_message_bits(10);
+        for (int i = 0; i < 10; ++i) {
+            vector_message_bits(i) = GF2((message_value >> (9 - i)) & 1);
+        }
 
-    bool cheking_2 = true;
-    for (int i = 0; i < H_rows; ++i) {
-        if (zero_vector.coeff(0, i) != 0){
-            cheking_2 = false;
-            break;
-        } 
+        Eigen::VectorX<GF2> codeword{};
+        Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> G_matrix{};
+        std::tie(G_matrix, codeword) = H_to_codeword(H_file, vector_message_bits, H_rows, H_cols);
+        Eigen::VectorX<GF2> zero_vector = checking_syndrome(codeword, H_file, H_rows, H_cols);
+
+        CHECK(G_matrix.rows() == H_cols - H_rows);
+        CHECK(G_matrix.cols() == H_cols);
+        CHECK(zero_vector.cols() == 1);
+        CHECK(zero_vector.rows() == H_rows);
+
+        Eigen::VectorX<GF2> expected_zero_vector = Eigen::VectorX<GF2>::Zero(zero_vector.size());
+
+        CHECK(zero_vector == expected_zero_vector);
     }
-    CHECK(cheking_2);
 }

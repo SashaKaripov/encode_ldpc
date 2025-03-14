@@ -6,20 +6,32 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "eigen/Eigen/Sparse"
+#include "eigen\Eigen\Sparse"
+#include "eigen\Eigen\Dense"
 #include "GF2.hpp"
 #include <typeinfo>
 #include <utility>
+#include <filesystem>
 
-std::pair<Eigen::SparseMatrix<GF2>, Eigen::SparseMatrix<GF2>> H_to_X(std::ifstream& file_matrix_H, std::vector<int> bits_message, int H_rows, int H_cols)
+
+Eigen::SparseMatrix<GF2> read_matrix(const std::string& file_name, const int& H_rows, const int& H_cols)
 {
+    if (!std::filesystem::exists(file_name)) {
+        throw std::runtime_error("File does not exist: " + file_name);
+    }
+
+    std::ifstream file(file_name);
+    file.clear();
+    file.seekg(0);
     std::string line;
     Eigen::SparseMatrix<GF2> H(H_rows, H_cols);
     int H_col{};
-    // Извлекаем матрицу H из файла
+
+    
+
     for (int i{}; i < H_rows; i++) {
         H_col = 0;
-        std::getline(file_matrix_H, line);
+        std::getline(file, line);
         std::istringstream iss(line);
         int number;
         while (iss >> number) {
@@ -27,55 +39,61 @@ std::pair<Eigen::SparseMatrix<GF2>, Eigen::SparseMatrix<GF2>> H_to_X(std::ifstre
             H_col += 1;
         }
     }
-    Eigen::SparseMatrix<GF2> H_transposed = H.transpose();
-    int G_cols{ H_cols };
-    int G_rows{ H_cols - H_rows };
-    Eigen::SparseMatrix<GF2> G_matrix(G_rows, G_cols);
-    // Добавляем в G слева единичную матрицу
-    for (int row{}; row < G_rows; row++) {
-        for (int col{}; col < G_rows; col++) {
-            if (row == col) {
-                G_matrix.insert(row, col) = GF2(1);
-            }
-            else {
-                G_matrix.insert(row, col) = GF2(0);
-            }
-        }
-    }
-    // Добавляем в G справа транспонированную матрицу A
-    for (int row{}; row < (H_cols - H_rows); row++) {
-        for (int col{}; col < H_rows; col++) {
-            GF2 A_element{ H_transposed.coeff(row, col) };
-            G_matrix.insert(row, col + G_rows) = A_element;
-        }
-    }
-    Eigen::SparseMatrix<GF2> message_vector(1, G_rows);
-    for (int col{}; col < G_rows; col++){
-        GF2 bit_message{bits_message[col]};
-        message_vector.insert(0, col) = bit_message;
-    }
-    Eigen::SparseMatrix<GF2> X = message_vector * G_matrix;
-    return std::make_pair(G_matrix, X);
+
+    return H;
 }
 
-Eigen::SparseMatrix<GF2> checking_syndrome(Eigen::SparseMatrix<GF2>& X, std::ifstream& file_matrix_H, int H_rows, int H_cols)
+
+std::pair<Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic>,
+          Eigen::VectorX<GF2>> H_to_codeword(const std::string& file_matrix_H,
+                                                  const Eigen::VectorX<GF2>& bits_message,
+                                                  const int& H_rows, const int& H_cols)
 {
-    std::string line;
-    Eigen::SparseMatrix<GF2> H(H_rows, H_cols);
-    int H_col{};
-    for (int i{}; i < H_rows; i++) {
-        H_col = 0;
-        std::getline(file_matrix_H, line);
-        std::istringstream iss(line);
-        int number;
-        while (iss >> number) {
-            H.insert(i, H_col) = GF2(number);
-            H_col += 1;
+    Eigen::SparseMatrix<GF2> H {read_matrix(file_matrix_H, H_rows, H_cols)};
+    Eigen::SparseMatrix<GF2> H_transposed = H.transpose();
+
+    const int G_cols{ H_cols };
+    const int G_rows{ H_cols - H_rows };
+    Eigen::SparseMatrix<GF2> G_matrix(G_rows, G_cols);
+
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> zero_matrix(G_rows, G_rows);
+    zero_matrix.setIdentity();
+
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> dense_G_matrix = G_matrix.toDense();
+	dense_G_matrix.block(0, 0, G_rows, G_rows) = zero_matrix;
+
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> dense_H_transposed = H_transposed.toDense();
+
+    dense_G_matrix.block(0, G_rows, G_rows, H_rows) = dense_H_transposed.block(0,0,G_rows, H_rows);
+
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> dense_codeword = bits_message.transpose() * dense_G_matrix;
+
+    Eigen::VectorX<GF2> codeword(dense_codeword.size());
+    for (int i = 0; i < dense_codeword.rows(); ++i) {
+        for (int j = 0; j < dense_codeword.cols(); ++j) {
+            codeword(i * dense_codeword.cols() + j) = dense_codeword(i, j);
         }
     }
+    return std::make_pair(dense_G_matrix, codeword);
+}
+
+Eigen::VectorX<GF2> checking_syndrome(const Eigen::VectorX<GF2>& codeword,
+                                           const std::string& file_matrix_H,
+                                           const int& H_rows, const int& H_cols)
+{
+    Eigen::SparseMatrix<GF2> H {read_matrix(file_matrix_H, H_rows, H_cols)};
+
     Eigen::SparseMatrix<GF2> H_transposed = H.transpose();
-    // Делаем проверку. X*HT=0
-    Eigen::SparseMatrix<GF2> zero_vector = X * H_transposed;
+
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> zero_maxtrix_vec = codeword.transpose() * H_transposed;
+
+    Eigen::VectorX<GF2> zero_vector (zero_maxtrix_vec.size());
+    for (int i = 0; i < zero_maxtrix_vec.rows(); ++i) {
+        for (int j = 0; j < zero_maxtrix_vec.cols(); ++j) {
+            zero_vector(i * zero_maxtrix_vec.cols() + j) = zero_maxtrix_vec(i, j);
+        }
+    }
     return zero_vector;
 }
+
 #endif FUNCTIONS_H
