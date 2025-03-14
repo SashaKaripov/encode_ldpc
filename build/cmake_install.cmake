@@ -1,4 +1,4 @@
-# Install script for directory: D:/hmmmmm
+# Install script for directory: D:/encode_ldpc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,12 +39,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/hmmmmm/build/_deps/eigen-build/cmake_install.cmake")
+  include("D:/encode_ldpc/build/_deps/eigen-build/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/hmmmmm/build/_deps/doctest-build/cmake_install.cmake")
+  include("D:/encode_ldpc/build/_deps/doctest-build/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/hmmmmm/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/encode_ldpc/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

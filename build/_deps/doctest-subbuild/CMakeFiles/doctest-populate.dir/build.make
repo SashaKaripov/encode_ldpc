@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\hmmmmm\build\_deps\doctest-subbuild
+CMAKE_SOURCE_DIR = D:\encode_ldpc\build\_deps\doctest-subbuild
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\hmmmmm\build\_deps\doctest-subbuild
+CMAKE_BINARY_DIR = D:\encode_ldpc\build\_deps\doctest-subbuild
 
 # Utility rule file for doctest-populate.
 
@@ -76,60 +76,60 @@ CMakeFiles/doctest-populate-complete: doctest-populate-prefix/src/doctest-popula
 CMakeFiles/doctest-populate-complete: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-build
 CMakeFiles/doctest-populate-complete: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-install
 CMakeFiles/doctest-populate-complete: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-test
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'doctest-populate'"
-	"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/hmmmmm/build/_deps/doctest-subbuild/CMakeFiles
-	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/CMakeFiles/doctest-populate-complete
-	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-done
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'doctest-populate'"
+	"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/encode_ldpc/build/_deps/doctest-subbuild/CMakeFiles
+	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/CMakeFiles/doctest-populate-complete
+	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-done
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update:
 .PHONY : doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-build: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-configure
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No build step for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No build step for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-build
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-configure: doctest-populate-prefix/tmp/doctest-populate-cfgcmd.txt
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-configure: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "No configure step for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-configure
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "No configure step for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-configure
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-download: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-gitinfo.txt
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-download: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-mkdir
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (git clone) for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps && "C:\Program Files\CMake\bin\cmake.exe" -P D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-gitclone.cmake
-	cd /d D:\hmmmmm\build\_deps && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-download
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (git clone) for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps && "C:\Program Files\CMake\bin\cmake.exe" -P D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-gitclone.cmake
+	cd /d D:\encode_ldpc\build\_deps && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-download
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-install: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-install
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-install
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-mkdir:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'doctest-populate'"
-	"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir= -P D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-mkdirs.cmake
-	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-mkdir
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'doctest-populate'"
+	"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir= -P D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-mkdirs.cmake
+	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-mkdir
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch-info.txt
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'doctest-populate'"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'doctest-populate'"
 	"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch
+	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-patch
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update:
 .PHONY : doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-test: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-install
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No test step for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-	cd /d D:\hmmmmm\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-test
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No test step for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+	cd /d D:\encode_ldpc\build\_deps\doctest-build && "C:\Program Files\CMake\bin\cmake.exe" -E touch D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-test
 
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update: doctest-populate-prefix/tmp/doctest-populate-gitupdate.cmake
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update-info.txt
 doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-update: doctest-populate-prefix/src/doctest-populate-stamp/doctest-populate-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Performing update step for 'doctest-populate'"
-	cd /d D:\hmmmmm\build\_deps\doctest-src && "C:\Program Files\CMake\bin\cmake.exe" -Dcan_fetch=YES -P D:/hmmmmm/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-gitupdate.cmake
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Performing update step for 'doctest-populate'"
+	cd /d D:\encode_ldpc\build\_deps\doctest-src && "C:\Program Files\CMake\bin\cmake.exe" -Dcan_fetch=YES -P D:/encode_ldpc/build/_deps/doctest-subbuild/doctest-populate-prefix/tmp/doctest-populate-gitupdate.cmake
 
 doctest-populate: CMakeFiles/doctest-populate
 doctest-populate: CMakeFiles/doctest-populate-complete
@@ -153,6 +153,6 @@ CMakeFiles/doctest-populate.dir/clean:
 .PHONY : CMakeFiles/doctest-populate.dir/clean
 
 CMakeFiles/doctest-populate.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\hmmmmm\build\_deps\doctest-subbuild D:\hmmmmm\build\_deps\doctest-subbuild D:\hmmmmm\build\_deps\doctest-subbuild D:\hmmmmm\build\_deps\doctest-subbuild D:\hmmmmm\build\_deps\doctest-subbuild\CMakeFiles\doctest-populate.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\encode_ldpc\build\_deps\doctest-subbuild D:\encode_ldpc\build\_deps\doctest-subbuild D:\encode_ldpc\build\_deps\doctest-subbuild D:\encode_ldpc\build\_deps\doctest-subbuild D:\encode_ldpc\build\_deps\doctest-subbuild\CMakeFiles\doctest-populate.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/doctest-populate.dir/depend
 
