@@ -56,11 +56,11 @@ std::pair<Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic>,
     const int G_rows{ H_cols - H_rows };
     Eigen::SparseMatrix<GF2> G_matrix(G_rows, G_cols);
 
-    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> zero_matrix(G_rows, G_rows);
-    zero_matrix.setIdentity();
+    Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> identity_matrix(G_rows, G_rows);
+    identity_matrix.setIdentity();
 
     Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> dense_G_matrix = G_matrix.toDense();
-	dense_G_matrix.block(0, 0, G_rows, G_rows) = zero_matrix;
+	dense_G_matrix.block(0, 0, G_rows, G_rows) = identity_matrix;
 
     Eigen::Matrix<GF2, Eigen::Dynamic, Eigen::Dynamic> dense_H_transposed = H_transposed.toDense();
 
